@@ -13,11 +13,12 @@ const forecast = (latitude, longitude, callback) => {
         }else if(body.error){
             callback(body.error, undefined);
         }else{
-            callback(undefined, body.daily.summary+
-                ' Currently it is '+body.currently.temperature+ 
-                ' degrees out there. Chance of precipitation today is '+
-                body.currently.precipProbability+
-                '%.');
+            const forecast = {
+                hourly: body.hourly.summary,
+                daily: body.daily.summary,
+                forecastData: 'Currently it is '+ body.currently.temperature+ ' degrees out there. Chance of precipitation today is '+ body.currently.precipProbability+ '%.'
+            }
+            callback(undefined, forecast);
         }
     })
 }
